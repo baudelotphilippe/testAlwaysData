@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      
   workflow_dispatch:
 
 jobs:
@@ -21,5 +20,4 @@ jobs:
 
       - name: SSH and run Hello World
         run: |
-          ssh -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes baudelot@ssh-baudelot.alwaysdata.net 'echo "✅ Hello from AlwaysData !"'
-
+          ssh -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes baudelot@ssh-baudelot.alwaysdata.net 'echo "✅ Hello from AlwaysData via GitHub Actions !"'
