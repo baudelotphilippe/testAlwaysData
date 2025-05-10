@@ -19,5 +19,7 @@ jobs:
           ssh-keyscan ssh-baudelot.alwaysdata.net >> ~/.ssh/known_hosts
 
       - name: SSH and run Hello World
+        env:
+          SSH_AUTH_SOCK: none  # <<< désactive l'agent SSH
         run: |
           ssh -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes baudelot@ssh-baudelot.alwaysdata.net 'echo "✅ Hello from AlwaysData via GitHub Actions !"'
