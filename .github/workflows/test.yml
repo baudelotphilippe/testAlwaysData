@@ -1,4 +1,4 @@
-name: Test AlwaysData PostgreSQL
+name: Test insert BD
 
 on:
   workflow_dispatch:
