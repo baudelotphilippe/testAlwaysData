@@ -19,5 +19,5 @@ jobs:
           PGUSER: ${{ secrets.AD_DB_USER }}
           PGPASSWORD: ${{ secrets.AD_DB_PASSWORD }}
         run: |
-          echo "INSERT INTO test (message) VALUES ('Depuis GitHub Actions via PostgreSQL');" > insert.sql
-          psql -h "$PGHOST" -p "$PGPORT" -U "$PGUSER" -d "$PGDATABASE" -f insert.sql
+           echo "INSERT INTO article (title, link, category, date, source, created_at) VALUES ('Test GitHub Actions', 'https://example.com', 'test', CURRENT_TIMESTAMP, 'actions', CURRENT_TIMESTAMP);" > insert.sql
+           psql -h "$PGHOST" -p "$PGPORT" -U "$PGUSER" -d "$PGDATABASE" -f insert.sql
