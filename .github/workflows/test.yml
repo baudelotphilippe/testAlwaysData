@@ -15,7 +15,7 @@ jobs:
         env:
           PGHOST: ${{ secrets.AD_DB_HOST }}
           PGPORT: ${{ secrets.AD_DB_PORT }}
-          PGDATABASE: ${{ secrets.AD_PG_DB }}
+          PGDATABASE: ${{ secrets.AD_DB_NAME }}
           PGUSER: ${{ secrets.AD_DB_USER }}
           PGPASSWORD: ${{ secrets.AD_DB_PASSWORD }}
         run: |
