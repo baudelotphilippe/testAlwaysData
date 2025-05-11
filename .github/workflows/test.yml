@@ -13,11 +13,11 @@ jobs:
 
       - name: Insérer un message dans la BDD AlwaysData
         env:
-          PGHOST: ${{ secrets.AD_PG_HOST }}
-          PGPORT: ${{ secrets.AD_PG_PORT }}
+          PGHOST: ${{ secrets.AD_DB_HOST }}
+          PGPORT: ${{ secrets.AD_DB_PORT }}
           PGDATABASE: ${{ secrets.AD_PG_DB }}
-          PGUSER: ${{ secrets.AD_PG_USER }}
-          PGPASSWORD: ${{ secrets.AD_PG_PASSWORD }}
+          PGUSER: ${{ secrets.AD_DB_USER }}
+          PGPASSWORD: ${{ secrets.AD_DB_PASSWORD }}
         run: |
           echo "INSERT INTO test (message) VALUES ('Depuis GitHub Actions via PostgreSQL');" > insert.sql
           psql -h "$PGHOST" -p "$PGPORT" -U "$PGUSER" -d "$PGDATABASE" -f insert.sql
