@@ -1,25 +1,23 @@
-name: Test SSH Connection
+name: Test AlwaysData PostgreSQL
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
-  ssh-test:
+  test-db:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Setup SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan ssh-baudelot.alwaysdata.net >> ~/.ssh/known_hosts
+      - name: Installer PostgreSQL client
+        run: sudo apt-get install -y postgresql-client
 
-      - name: SSH and run Hello World
+      - name: Insérer un message dans la BDD AlwaysData
         env:
-          SSH_AUTH_SOCK: none  # <<< désactive l'agent SSH
+          PGHOST: ${{ secrets.AD_PG_HOST }}
+          PGPORT: ${{ secrets.AD_PG_PORT }}
+          PGDATABASE: ${{ secrets.AD_PG_DB }}
+          PGUSER: ${{ secrets.AD_PG_USER }}
+          PGPASSWORD: ${{ secrets.AD_PG_PASSWORD }}
         run: |
-          ssh -vvv -i ~/.ssh/id_ed25519 -o IdentitiesOnly=yes baudelot@ssh-baudelot.alwaysdata.net 'echo "✅ Hello from AlwaysData via GitHub Actions !"'
+          echo "INSERT INTO test (message) VALUES ('Depuis GitHub Actions via PostgreSQL');" > insert.sql
+          psql --no-password -f insert.sql
