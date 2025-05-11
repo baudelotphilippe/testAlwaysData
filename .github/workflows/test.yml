@@ -20,4 +20,4 @@ jobs:
           PGPASSWORD: ${{ secrets.AD_PG_PASSWORD }}
         run: |
           echo "INSERT INTO test (message) VALUES ('Depuis GitHub Actions via PostgreSQL');" > insert.sql
-          psql --no-password -f insert.sql
+          psql -h "$PGHOST" -p "$PGPORT" -U "$PGUSER" -d "$PGDATABASE" -f insert.sql
